@@ -90,6 +90,6 @@ This kit was built using the following off the shelf parts:
  - RaspberryPi  https://www.raspberrypi.org/products/raspberry-pi-3-model-b/
  - OSEPP Tank kit  https://www.osepp.com/robotic-kits/4-tank-mechanical-kit
  - 7.4v RC Car Battery 
- - Robot Hat Cntroller https://www.raspberrypi.org/products/raspberry-pi-3-model-b/
+ - Robot Hat Cntroller https://geekworm.com/collections/raspberry-pi-4/products/new-updated-raspberry-pi-motor-hat-full-function-robot-expansion-board
  - Random USB battery for pi 
  - Random "deans connector" for battery 
