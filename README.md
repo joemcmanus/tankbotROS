@@ -12,6 +12,19 @@ git clone git@github.com:joemcmanus/tankbotROS.git
 ```
 
 
+1b. If you have not installed ROS yet do the following
+
+```
+joe@tankbot:~$ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+joe@tankbot:~$ sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+joe@tankbot:~$ sudo apt install ros-melodic-ros-base
+joe@tankbot:~$ sudo rosdep init 
+joe@tankbot:~$ rosdep update 
+joe@tankbot:~$ echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+joe@tankbot:~$ source ~/.bashrc
+joe@tankbot:~$ sudo apt install python-rosinstall python-rosinstall-generator python-wstool build-essential
+```
+
 2. Setup workspace
 
 ```
