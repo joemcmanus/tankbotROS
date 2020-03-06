@@ -2,6 +2,7 @@
 
 An intro to ROS using a tank kit
 
+![alt_tag](https://github.com/joemcmanus/tankbotROS/blob/master/img/tankbotFlask.jpg)
 # Setup
 ----
 
