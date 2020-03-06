@@ -18,16 +18,15 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from flask import Flask, Markup, request, make_response, escape, render_template
-import Robot
+import rospy 
+from std_msgs.msg import String
+import threading 
 
 app = Flask(__name__)
 
-
-leftTrim = 0
-rightTrim = 0
-
-robot = Robot.Robot(left_trim=leftTrim, right_trim=rightTrim)
-
+threading.Thread(target=lambda:  rospy.init_node('talker', disable_signals=True, anonymous=True)).start()
+pub = rospy.Publisher('/command', String, queue_size=10)
+        
 
 @app.route("/")
 def index():
@@ -47,22 +46,19 @@ def index():
 def drive(urlDir):
     titleText = "Drive the bot"
     if urlDir == "1":
-        robot.forward(150, 1.00)
         direction = "Forward"
         link = "/drive/1"
     if urlDir == "2":
-        robot.backward(150, 1.00)
-        direction = "Backward"
+        direction = "Back"
         link = "/drive/2"
     if urlDir == "3":
-        robot.left(150, 1.00)
         direction = "Left"
         link = "/drive/3"
     if urlDir == "4":
-        robot.right(150, 1.00)
         direction = "Right"
         link = "/drive/4"
-    robot.stop()
+    pub.publish(direction)
+
     bodyText = Markup(
         "Moving " + direction + "<br> <a href=" + link + ">" + direction + "</a><br>"
     )
@@ -79,7 +75,6 @@ def about():
     return render_template('templatecss.html', bodyText=bodyText, titleText=titleText)
 
 
-
 if __name__ == "__main__":
     app.debug = True
-    app.run(host="0.0.0.0", port=80)
+    app.run(threaded=True, host="0.0.0.0", port=8080)
