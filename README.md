@@ -1,8 +1,8 @@
 # tankbotRos
 
 An intro to ROS using a tank kit
+![alt_tag](https://github.com/joemcmanus/tankbotROS/blob/master/img/tankbotStand.jpg)
 
-![alt_tag](https://github.com/joemcmanus/tankbotROS/blob/master/img/tankbotFlask.jpg)
 # Setup
 ----
 
@@ -73,3 +73,21 @@ joe@tankbot:~/tankbot_ros_ws$ rosrun tankbot_ros driver_node
 joe@tankbot:~$ rostopic pub -1 /command std_msgs/String "Forward"
 joe@tankbot:~$ rostopic pub -1 /command std_msgs/String "Backward"
 ```
+
+# Flask
+----
+![alt_tag](https://github.com/joemcmanus/tankbotROS/blob/master/img/tankbotFlask.jpg)
+
+A flask app to drive the robot can be run by starting the 2 steps above and for step three running python server.py 
+
+
+# Parts
+----
+
+![alt_tag](https://github.com/joemcmanus/tankbotROS/blob/master/img/tankbotParts.jpg)
+
+This kit was built using the following off the shelf parts:
+ - RaspberryPi 3B
+ - OSEPP Tank kit 
+ - 7.4v RC Car Battery 
+ - Robot Hat Cntroller
