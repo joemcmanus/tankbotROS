@@ -87,7 +87,9 @@ A flask app to drive the robot can be run by starting the 2 steps above and for 
 ![alt_tag](https://github.com/joemcmanus/tankbotROS/blob/master/img/tankbotParts.jpg)
 
 This kit was built using the following off the shelf parts:
- - RaspberryPi 3B
- - OSEPP Tank kit 
+ - RaspberryPi  https://www.raspberrypi.org/products/raspberry-pi-3-model-b/
+ - OSEPP Tank kit  https://www.osepp.com/robotic-kits/4-tank-mechanical-kit
  - 7.4v RC Car Battery 
- - Robot Hat Cntroller
+ - Robot Hat Cntroller https://www.raspberrypi.org/products/raspberry-pi-3-model-b/
+ - Random USB battery for pi 
+ - Random "deans connector" for battery 
