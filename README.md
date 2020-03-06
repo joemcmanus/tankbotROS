@@ -80,6 +80,7 @@ joe@tankbot:~$ rostopic pub -1 /command std_msgs/String "Backward"
 
 A flask app to drive the robot can be run by starting the 2 steps above and for step three running python server.py 
 
+Since it will be wireless driving around, I would lunch the above commands in screen sessions in case your terminal drops. 
 
 # Parts
 ----
