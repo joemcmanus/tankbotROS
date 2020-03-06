@@ -8,7 +8,7 @@ An intro to ROS using a tank kit
 1. clone the repo
 
 ```
-     git clone git@github.com:joemcmanus/tankbotROS.git
+git clone git@github.com:joemcmanus/tankbotROS.git
 ```
 
 
