@@ -39,6 +39,12 @@ sudo usermod -aG i2c joe
 
 You will need 3 terminals to make this work. 
  - Log in and run roscore 
+```
+joe@tankbot:~$ roscore 
+... logging to /home/joe/.ros/log/2c987dd4-5f52-11ea-b4f2-b827eb2ffb14/roslaunch-tankbot-7884.log
+Checking log directory for disk usage. This may take awhile.
+```
+
  - Log in and launch the driver_node
 
 ```
