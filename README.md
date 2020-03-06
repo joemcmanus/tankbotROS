@@ -2,11 +2,14 @@
 
 An intro to ROS using a tank kit
 
-#Setup
+# Setup
+----
 
-1. clone the repot 
+1. clone the repo
+
 
      git clone git@github.com:joemcmanus/tankbotROS.git
+
 
 2. Setup workspace
 
