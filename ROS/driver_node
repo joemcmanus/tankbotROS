@@ -1,0 +1,60 @@
+#!/usr/bin/env python 
+import rospy
+from std_msgs.msg import String
+import Robot
+
+
+leftTrim = 0
+rightTrim = 0
+
+robot = Robot.Robot(left_trim=leftTrim, right_trim=rightTrim)
+
+def forward():
+    print("Forward")
+    robot.forward(150, 1.00)
+
+def back():
+    print("Back")
+    robot.backward(150, 1.00)
+
+def left():
+    print("Left")
+    robot.left(150, 1.00)
+
+def right():
+    print("Right")
+    robot.right(150, 1.00)
+
+def stop():
+    print("Stop")
+    robot.stop()
+
+# Message handler
+def CommandCallback(commandMessage):
+    command = commandMessage.data
+    if command == 'Forward':
+        print('Moving forwards')
+        forward()
+    elif command == 'Back':
+        print('Moving backwards')
+        back()
+    elif command == 'Left':
+        print('Turning left')
+        left()
+    elif command == 'Right':
+        print('Turning right')
+        right()
+    elif command == 'Stop':
+        print('Stopping')
+        stop()
+    else:
+        print('Unknown command, stopping instead')
+        stop()
+
+rospy.init_node('driver')
+
+rospy.Subscriber('command', String, CommandCallback)
+
+rospy.spin()
+print('Shutting down: stopping motors')
+stop()
