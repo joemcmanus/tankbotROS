@@ -67,7 +67,7 @@ joe@tankbot:~/tankbot_ros_ws$ source devel/setup.bash
 joe@tankbot:~/tankbot_ros_ws$ rosrun tankbot_ros driver_node 
 
 ```
- - Log in to terminal 3 and test the app, not it is a #1 not a lowercase L. 
+ - Log in to terminal 3 and test the app, *note* it is a #1 not a lowercase L. 
 
 ```
 joe@tankbot:~$ rostopic pub -1 /command std_msgs/String "Forward"
