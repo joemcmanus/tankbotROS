@@ -2,6 +2,11 @@
 import rospy
 from std_msgs.msg import String
 import Robot
+import time 
+import RPi.GPIO as GPIO
+
+# Use board based pin numbering
+GPIO.setmode(GPIO.BOARD)
 
 
 leftTrim = 0
@@ -9,47 +14,74 @@ rightTrim = 0
 
 robot = Robot.Robot(left_trim=leftTrim, right_trim=rightTrim)
 
+
 def forward():
     print("Forward")
-    robot.forward(150, 1.00)
+    robot.forward(50, 1.00)
 
 def back():
     print("Back")
-    robot.backward(150, 1.00)
+    robot.backward(50, 1.00)
 
 def left():
     print("Left")
-    robot.left(150, 1.00)
+    robot.left(50, 1.00)
 
 def right():
     print("Right")
-    robot.right(150, 1.00)
+    robot.right(50, 1.00)
 
 def stop():
     print("Stop")
     robot.stop()
 
+def readDistance(pin):
+    GPIO.setup(pin, GPIO.OUT)
+    GPIO.output(pin, 0)
+    time.sleep(0.000002)
+    #send trigger signal
+    GPIO.output(pin, 1)
+    time.sleep(0.000005)
+    GPIO.output(pin, 0)
+    GPIO.setup(pin, GPIO.IN)
+
+    while GPIO.input(pin)==0:
+        starttime=time.time()
+
+    while GPIO.input(pin)==1:
+        endtime=time.time()
+
+    duration=endtime-starttime
+    # Distance is defined as time/2 (there and back) * speed of sound 34000 cm/s 
+    distance=duration*34000/2
+    return distance
+
 # Message handler
 def CommandCallback(commandMessage):
     command = commandMessage.data
-    if command == 'Forward':
-        print('Moving forwards')
-        forward()
-    elif command == 'Back':
-        print('Moving backwards')
-        back()
-    elif command == 'Left':
-        print('Turning left')
-        left()
-    elif command == 'Right':
-        print('Turning right')
-        right()
-    elif command == 'Stop':
-        print('Stopping')
-        stop()
-    else:
-        print('Unknown command, stopping instead')
-        stop()
+    for i in range(5): 
+        if readDistance(11) <= 20:
+            stop()
+            break
+        else:
+            if command == 'Forward':
+                print('Moving forwards')
+                forward()
+            elif command == 'Back':
+                print('Moving backwards')
+                back()
+            elif command == 'Left':
+                print('Turning left')
+                left()
+            elif command == 'Right':
+                print('Turning right')
+                right()
+            elif command == 'Stop':
+                print('Stopping')
+                stop()
+            else:
+                print('Unknown command, stopping instead')
+                stop()
 
 rospy.init_node('driver')
 
