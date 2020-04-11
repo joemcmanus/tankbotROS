@@ -59,29 +59,31 @@ def readDistance(pin):
 # Message handler
 def CommandCallback(commandMessage):
     command = commandMessage.data
+    print(command)
     for i in range(5): 
-        if readDistance(11) <= 20:
+        if command != "Back" and command != "Stop":
+            if readDistance(11) < 15:
+                stop()
+                break
+        
+        if command == 'Forward':
+            print('Moving forwards')
+            forward()
+        elif command == 'Back':
+            print('Moving backwards')
+            back()
+        elif command == 'Left':
+            print('Turning left')
+            left()
+        elif command == 'Right':
+            print('Turning right')
+            right()
+        elif command == 'Stop':
+            print('Stopping')
             stop()
-            break
         else:
-            if command == 'Forward':
-                print('Moving forwards')
-                forward()
-            elif command == 'Back':
-                print('Moving backwards')
-                back()
-            elif command == 'Left':
-                print('Turning left')
-                left()
-            elif command == 'Right':
-                print('Turning right')
-                right()
-            elif command == 'Stop':
-                print('Stopping')
-                stop()
-            else:
-                print('Unknown command, stopping instead')
-                stop()
+           print('Unknown command, stopping instead')
+           stop()
 
 rospy.init_node('driver')
 

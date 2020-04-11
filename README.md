@@ -43,10 +43,10 @@ joe@tankbot:~/tankbot_ros_ws/src$ cd ~/tankbot_ros_ws/
 joe@tankbot:~/tankbot_ros_ws$ catkin_make 
 ```
 
-4. Enable i2c without running as root
+4. Enable i2c and GPIO without running as root
 
 ```
-sudo usermod -aG i2c joe
+sudo usermod -aG i2c,dialout joe
 
 ```
 5. Test
