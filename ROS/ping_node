@@ -1,0 +1,59 @@
+#!/usr/bin/env python 
+# File    : ping_node  - a python script to read a Parallax Ping sensor and publish to a ROS topic
+# Author  : Joe McManus joe.mcmanus@canonical.com
+# Version : 0.1  04/25/2020 Joe McManus
+# Copyright (C) 2020 Joe McManus
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+import rospy
+from std_msgs.msg import String
+import time 
+import RPi.GPIO as GPIO
+
+# Use board based pin numbering
+GPIO.setmode(GPIO.BOARD)
+
+
+def readDistance(pin):
+    GPIO.setup(pin, GPIO.OUT)
+    GPIO.output(pin, 0)
+    time.sleep(0.000002)
+    #send trigger signal
+    GPIO.output(pin, 1)
+    time.sleep(0.000005)
+    GPIO.output(pin, 0)
+    GPIO.setup(pin, GPIO.IN)
+
+    while GPIO.input(pin)==0:
+        starttime=time.time()
+
+    while GPIO.input(pin)==1:
+        endtime=time.time()
+
+    duration=endtime-starttime
+    # Distance is defined as time/2 (there and back) * speed of sound 34000 cm/s 
+    distance=duration*34000/2
+    return str(distance)
+
+# Publish the topic, not here the topic is called "ping"
+def pubPing():
+    pub = rospy.Publisher('ping', String, queue_size=10)
+    rospy.init_node('distance', anonymous=True)
+    rate = rospy.Rate(10)
+    while not rospy.is_shutdown():
+        pub.publish(readDistance(11))
+        rate.sleep()
+
+pubPing()
