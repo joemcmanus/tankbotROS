@@ -1,6 +1,6 @@
 # tankbotROS
 
-An intro to ROS using a tank kit
+An intro to ROS using a tank kit, RPi and ultrasnoc sensor. 
 ![alt_tag](https://github.com/joemcmanus/tankbotROS/blob/master/img/tankbotStand.jpg)
 
 # Setup
@@ -51,12 +51,20 @@ sudo usermod -aG i2c,dialout joe
 ```
 5. Test
 
-You will need 3 terminals to make this work. 
+You will need 4 terminals to make this work. 
  - Log in and run roscore 
 ```
 joe@tankbot:~$ roscore 
 ... logging to /home/joe/.ros/log/2c987dd4-5f52-11ea-b4f2-b827eb2ffb14/roslaunch-tankbot-7884.log
 Checking log directory for disk usage. This may take awhile.
+```
+
+ - Log in and launc the distance sensor/ping_node
+
+```
+joe@tankbot:~/tankbot_ros_ws$ cd ~/tankbot_ros_ws/
+joe@tankbot:~/tankbot_ros_ws$ source devel/setup.bash 
+joe@tankbot:~/tankbot_ros_ws$ rosrun tankbot_ros ping_node 
 ```
 
  - Log in and launch the driver_node
@@ -67,7 +75,7 @@ joe@tankbot:~/tankbot_ros_ws$ source devel/setup.bash
 joe@tankbot:~/tankbot_ros_ws$ rosrun tankbot_ros driver_node 
 
 ```
- - Log in to terminal 3 and test the app, *note* it is a #1 not a lowercase L. 
+ - Log in to terminal 4 and test the app, *note* it is a #1 not a lowercase L. 
 
 ```
 joe@tankbot:~$ rostopic pub -1 /command std_msgs/String "Forward"
@@ -78,9 +86,14 @@ joe@tankbot:~$ rostopic pub -1 /command std_msgs/String "Backward"
 ----
 ![alt_tag](https://github.com/joemcmanus/tankbotROS/blob/master/img/tankbotFlask.jpg)
 
-A flask app to drive the robot can be run by starting the 2 steps above and for step three running python server.py 
+A flask app to drive the robot can be run by starting the 2 step3 above and for step three running python server.py 
 
 Since it will be wireless driving around, I would lunch the above commands in screen sessions in case your terminal drops. 
+
+# Ros Topics
+----
+The robot is driven using the ROS topic /command and the distance is monitored using the topic /ping. 
+![alt_tag](https://github.com/joemcmanus/tankbotROS/blob/master/img/tankbotROS.png)
 
 # Parts
 ----
@@ -95,6 +108,7 @@ This kit was built using the following off the shelf parts:
  - Robot Hat Cntroller https://geekworm.com/collections/raspberry-pi-4/products/new-updated-raspberry-pi-motor-hat-full-function-robot-expansion-board
  - Random USB battery for pi https://www.amazon.com/gp/product/B07RSH9NP7/
  - Random "deans connector" for battery https://www.amazon.com/gp/product/B07WHPD4KD/
+ - Parallax Ping))) ultrasonic sensor https://www.parallax.com/product/28015
 
 # Standalone
 ----
@@ -109,6 +123,6 @@ Then you may want to start up the above processes on boot.
     crontab -e
     @reboot /home/you/yourScript.sh 
 
-Create a script that will start roscore, source the env file, start up the tankbot topic and then start flask. An exmaple of on I use is attached here as rosStart.sh . 
+Create a script that will start roscore, source the env file, start up the tankbot topic and then start flask. An exmaple of one I use is attached here as rosStart.sh . 
 
 
