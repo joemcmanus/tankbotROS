@@ -1,6 +1,6 @@
 # tankbotROS
 
-An intro to ROS using a tank kit, RPi and ultrasnoc sensor. 
+An intro to ROS using a tank kit, RPi and ultrasonic sensor. 
 ![alt_tag](https://github.com/joemcmanus/tankbotROS/blob/master/img/tankbotStand.jpg)
 
 # Setup
